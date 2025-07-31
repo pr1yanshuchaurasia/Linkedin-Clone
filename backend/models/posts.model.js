@@ -41,9 +41,10 @@ const PostSchema = mongoose.Schema({
     fileType:{
         type: String,
         default: ''
-
     },
 });
+
+
 const Post = mongoose.model('Post',PostSchema);
 
 export default Post;
