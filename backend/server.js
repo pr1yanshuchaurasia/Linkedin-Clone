@@ -9,18 +9,31 @@ dotenv.config();
 
 const app = express();
 
+// Middlewares
 app.use(cors());
-
-app.use(postRoutes);
-app.use(userRoutes);
-
 app.use(express.json());
 
-const start = async()=>{
-    const connectDB = await mongoose.connect("mongodb+srv://priyanshuchaurasia8840:qSPR5KjOjXAQUGdN@linkedin-clone.2jfivma.mongodb.net/?retryWrites=true&w=majority&appName=Linkedin-clone")
+// API Routes with prefix
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
-    app.listen(9090, ()=>{
-        console.log("Server is running on port 9090");
-    })
-}
+// Health check route (optional)
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
+const start = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB connected");
+
+    app.listen(9090, () => {
+      console.log("Server is running on http://localhost:9090");
+    });
+  } catch (err) {
+    console.error("Failed to connect to MongoDB:", err.message);
+    process.exit(1);
+  }
+};
+
 start();
