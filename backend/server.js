@@ -14,13 +14,13 @@ app.use(cors());
 app.use(express.json());
 
 // API Routes with prefix
-app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
+app.use( userRoutes);
+app.use(postRoutes);
 
 // Health check route (optional)
-app.get("/", (req, res) => {
-  res.send("API is running");
-});
+// app.get("/", (req, res) => {
+//   res.send("API is running");
+// });
 
 const start = async () => {
   try {
