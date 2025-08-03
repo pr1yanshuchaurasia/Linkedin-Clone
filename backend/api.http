@@ -12,7 +12,7 @@ POST http://localhost:9090/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "priyanshu",
+     "email": "priyanshu@gmail.com",
     "password": "Priya@1234"
 }
 

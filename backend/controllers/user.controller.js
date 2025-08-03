@@ -43,23 +43,24 @@ export const register = async (req, res) => {
     return res.status(201).json({
       message: "User registered successfully",
     });
-
   } catch (error) {
     console.error("❌ Registration Error:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
 
-export const login = async (req,res)=>{
-  try{
+export const login = async (req, res) => {
+  try {
     const { email, password } = req.body;
 
     // Check for missing fields
     if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
     const user = await User.findOne({
-      email
+      email,
     });
 
     if (!user) {
@@ -67,16 +68,32 @@ export const login = async (req,res)=>{
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch){
-      return res.status(400).json({message:"Invalid Credentials"})
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
     const token = crypto.randomBytes(32).toString("hex");
 
-    await User.updateOne({_id: user._id}, { token });
-    return res.json({token});
+    await User.updateOne({ _id: user._id }, { token });
+    return res.json({ token });
+  } catch (error) {}
+};
 
-  }catch(error){
+export const uploadProfilePicture = async (req, res) => {
+  const { token } = req.body;
+  try {
+    const user = await User.findOne({ token: token });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.profilePicture = req.file.filename;
 
+    await user.save();
+
+    return res
+      .status(200)
+      .json({ message: "Profile picture updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
-} 
+};
