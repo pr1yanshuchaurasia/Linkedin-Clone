@@ -16,4 +16,12 @@ Content-Type: application/json
     "password": "Priya@1234"
 }
 
+GET http://localhost:9090/get_user_and_profile 
+Content-Type: application/json
+
+{
+    "token":"your_jwt_token_here"
+}
+
+
 
