@@ -97,3 +97,30 @@ export const uploadProfilePicture = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const updateUserProfile = async (req, res) => {
+
+  try{
+    const {token, ...newUserData}= req.body; //...spread Operator token nikal ke  sab kuch userdata me daal do..
+    const user = await User.findOne({ token: token });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const {username, email} = newUserData;
+
+    const existingUser = await User.findOne({
+      $or:[{ username }, { email }],
+    });
+
+    if(existingUser){
+      if(existingUser || String(existingUser._id) !== String(user._id)){
+      return res.status(400).json({ message: "User already exists" });
+       }
+    }
+    Object.assign(user,newUserData);
+
+  }catch(error){
+    return res.status(500).json({ message: error.message });
+  }
+}
