@@ -2,6 +2,16 @@ import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
 import Profile from "../models/profile.model.js";
 import crypto from "crypto";
+import PDFdocument from "pdfkit"; 
+
+
+const convertUserDataTOPDF = (userData)=>{
+  const doc = new PDFdocument();
+
+  const outputPath = cry
+
+}
+
 
 export const register = async (req, res) => {
   console.log(req.body);
@@ -180,4 +190,15 @@ export const getAllUserProfile = async (req,res)=>{
   }catch(error){
     return res.status(500).json({ message: error.message });
   }
+}
+
+export const downloadProfile = async (req,res)=>{
+  const user_id = req.query.id;
+
+  const userProfile = await Profile.findOne({userId: user_id}).populate('userId', 'name username email profilePicture');
+
+  let a = await convertUserDataTOPDF(userProfile);
+
+  return res.json({"message": a});
+
 }
