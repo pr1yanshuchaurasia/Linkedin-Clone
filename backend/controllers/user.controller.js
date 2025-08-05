@@ -163,8 +163,19 @@ export const updateProfileData = async (req, res) => {
 
     Object.assign(profile_to_update, newProfileData);
     await profile_to_update.save();
-    
+
     return res.json({ message: "Profile updated successfully" });
+
+  }catch(error){
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export const getAllUserProfile = async (req,res)=>{
+  try{
+    const profiles = await Profile.find().populate('userId', 'name username email profilePicture');
+
+    return res.json(profiles);
 
   }catch(error){
     return res.status(500).json({ message: error.message });
