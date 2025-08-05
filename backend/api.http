@@ -7,21 +7,54 @@ Content-Type: application/json
     "email": "priyanshu@gmail.com",
     "name": "Priyanshu Chaurasia"
 }
+###
 
 POST http://localhost:9090/login HTTP/1.1
 Content-Type: application/json
 
 {
-     "email": "priyanshu@gmail.com",
-    "password": "Priya@1234"
+  "email": "priyanshu@gmail.com",
+  "password": "Priya@1234"
+  
 }
+
+ ###
 
 GET http://localhost:9090/get_user_and_profile 
 Content-Type: application/json
 
 {
-    "token":"your_jwt_token_here"
+    "token":"713cd5210e452cddd42ceb361af2fa57c8d032bb2c2d3a98e2226d610f25f315"
 }
+
+###
+
+POST http://localhost:9090/update_profile_data
+Content-Type: application/json
+
+{
+  "token": "713cd5210e452cddd42ceb361af2fa57c8d032bb2c2d3a98e2226d610f25f315",
+   "bio": "",
+  "currentPost": "CEO",
+  "pastWork": [
+    {
+        "company": "Microsoft",
+        "position": "Software Engineer",
+        "years": "5+ years"
+    }
+  ],
+  "education": [
+    {
+        "college": "NIIT",
+        "degree": "B.Tech in Computer Science",
+        "years": "2020-2024"
+    }
+  ]
+}
+
+
+
+
 
 
 

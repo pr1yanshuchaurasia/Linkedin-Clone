@@ -163,6 +163,7 @@ export const updateProfileData = async (req, res) => {
 
     Object.assign(profile_to_update, newProfileData);
     await profile_to_update.save();
+    
     return res.json({ message: "Profile updated successfully" });
 
   }catch(error){
