@@ -16,11 +16,7 @@ app.use(express.json());
 // API Routes with prefix
 app.use( userRoutes);
 app.use(postRoutes);
-
-// Health check route (optional)
-// app.get("/", (req, res) => {
-//   res.send("API is running");
-// });
+app.use(express.static("uploads"));
 
 const start = async () => {
   try {
