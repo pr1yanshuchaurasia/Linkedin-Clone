@@ -57,6 +57,9 @@ Content-Type: application/json
 GET http://localhost:9090/user/get_all_users
 
 
+# http://localhost:9090/user/download_resume?id=688cbcc1c43e315e0bcc9e25 
+
+
 
 
 
