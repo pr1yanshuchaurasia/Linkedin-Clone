@@ -1,6 +1,6 @@
 import Profile from "../models/profile.model.js";
 import User from "../models/user.model.js";
-
+import Post from "../models/posts.model.js"
 import bcrypt from "bcrypt";
 
 export const activeCheck = (req, res) => {
@@ -21,8 +21,8 @@ export const createPost = async (req, res) => {
     const post = new Post({
       userId: user._id,
       body: req.body.body,
-      media: req.file != undefined ? req.file.fileName : "",
-      fileType: req.file != undefined ? req.file.mimetype.split("/"): "",
+      media: req.file != undefined ? req.file.filename : "",
+      fileType: req.file != undefined ? req.file.mimetype.split("/")[1]: "",
     })
 
     await post.save();

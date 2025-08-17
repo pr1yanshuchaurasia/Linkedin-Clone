@@ -60,7 +60,7 @@ GET http://localhost:9090/user/get_all_users
 # http://localhost:9090/user/download_resume?id=688cbcc1c43e315e0bcc9e25 
 
 
-
+# Post http://localhost:9090/post in form data upload token body and media details
 
 
 
