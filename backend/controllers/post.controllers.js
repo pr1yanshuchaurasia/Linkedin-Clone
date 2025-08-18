@@ -43,7 +43,7 @@ export const getAllPosts = async (req,res)=>{
   }
 }
 
-const deletePost = async(req,res)=>{
+export const deletePost = async(req,res)=>{
   const {token , post_id}= req.body;
 
   try{
