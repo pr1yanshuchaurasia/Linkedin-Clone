@@ -327,3 +327,27 @@ export const acceptConnectionRequest = async (req, res) => {
   }
 }
 
+export const commentPost = async (req,res)=>{
+  const {token, post_id, commentBody} = req.body;
+
+  try{
+    const user = await User.findOne({token: token}).select("_id");
+    if(!user){
+      return res.status(404).json({ message: "User not found" });
+    }
+    const post = await Post.findOne({_id: post_id});
+    if(!post){
+      return res.status(404).json({ message: "Post not found" });
+    }
+    const comment_to_add = new Comment({
+      userId: user._id,
+      postId: post._id,
+      comment: commentBody,
+    })
+    await comment.save();
+    return res.status(200).json({ message: "Comment added successfully" });
+  }catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
+}
