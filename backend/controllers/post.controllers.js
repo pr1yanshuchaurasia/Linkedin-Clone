@@ -42,3 +42,26 @@ export const getAllPosts = async (req,res)=>{
     return res.status(500).json({message: err.message})
   }
 }
+
+const deletePost = async(req,res)=>{
+  const {token , post_id}= req.body;
+
+  try{
+    const user = await User.findOne({token:token})
+    .select("_id");
+    if(!user){
+      return res.status(404).json({ message: "User not found" });
+    }
+    const post = await Post.findOne({_id: post_id});
+    if(!post){
+      return res.status(404).json({ message: "Post not found" });
+    }
+    if (post.userId.toString()!== user._id.toString()){
+      return res.status(401).json({message: "Unauthorised" })
+    }
+  }catch(err){
+    return res.status(500).json({message: err.message})
+  }
+
+
+}
