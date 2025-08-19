@@ -66,6 +66,7 @@ export const deletePost = async (req, res) => {
   }
 };
 
+
 export const get_comments_by_post = async (req, res) => {
   const { post_id } = req.body;
   try {
