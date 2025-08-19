@@ -78,3 +78,27 @@ export const get_comments_by_post = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+export const delete_comment_of_user = async (req, res) => {
+  const { token, comment_id } = req.body;
+
+  try {
+    const user = await User.findOne({ token: token }).select("_id");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const comment = await Comment.findOne({ _id: comment_id });
+    if (!comment) {
+      return res.status(404).json({ message: "Comment not found" });
+    }
+
+    if (comment.userId.toString() !== user._id.toString()) {
+      return res.status(401).json({ message: "Unauthorised" });
+    }
+    await Comment.deleteOne({ _id: comment_id });
+
+    return res.json({ message: "Comment deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
