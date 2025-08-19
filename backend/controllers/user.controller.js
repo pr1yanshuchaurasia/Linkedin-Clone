@@ -327,6 +327,7 @@ export const acceptConnectionRequest = async (req, res) => {
   }
 }
 
+
 export const commentPost = async (req,res)=>{
   const {token, post_id, commentBody} = req.body;
 
