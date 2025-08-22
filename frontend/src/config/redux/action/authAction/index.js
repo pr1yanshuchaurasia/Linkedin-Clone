@@ -31,4 +31,5 @@ export const registerUser = createAsyncThunk(
   async(user,thunkAPI)=>{
     
   }
+   
 )
