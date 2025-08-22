@@ -1,3 +1,4 @@
+const { loginUser } = require("../../action/authAction")
 
 const initialState = {
     user: [],
@@ -10,4 +11,34 @@ const initialState = {
     connections: [],
     connectionRequest: []
 }
+const authSlice = createSlice({
+    name: "auth",
+    initialState,
+    reducers:{
+        reset: ()=> initialState,
+        handleLoginUser: (state)=>{
+            state.message = "hello"
+        }
+    },
+    extraReducers: (builder)=>{
+        builder.addCase(loginUser.pending, (state)=>{
+            state.isLoading = true
+            state.message = "Knocking the door...."
+        })
+        .addCase(loginUser.fulfilled,(state,action)=>{
+            state.isLoading = false;
+            state.isError = false;
+            state.isSuccess = true;
+            state.loggedIn = true;
+            state.message = "Login is Successful"
+        })
+        .addCase(loginUser.rejected, (state,action)=>{
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+    }
+})
+
+export default authSlice.reducer
 
