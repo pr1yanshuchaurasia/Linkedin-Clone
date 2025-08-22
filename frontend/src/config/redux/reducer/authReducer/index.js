@@ -1,4 +1,6 @@
-const { loginUser, registerUser } = require("../../action/authAction");
+import { createSlice } from "@reduxjs/toolkit";
+import { loginUser, registerUser } from "../../action/authAction";
+
 
 const initialState = {
   user: [],
