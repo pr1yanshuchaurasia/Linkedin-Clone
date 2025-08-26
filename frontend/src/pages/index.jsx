@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <>
     <div className= {styles.container}>
-      <div className="mainContainer">
-        <div className="mainContainer__left">
+      <div className={styles.mainContainer}>
+        <div className={styles.mainContainer__left}>
           <p>Connect with Friends without Exaggeration</p>
           <p>A True social media platform, with stories no blufs !</p>
 
@@ -26,8 +26,8 @@ export default function Home() {
           </div>
 
         </div>
-         <div className="mainContainer__right">
-          <img src="images/homemain_container.jpg" alt="" />
+         <div className={styles.mainContainer__right}>
+          <img src="images/homemain.png" alt="" />
         </div>
       </div>
     </div>
