@@ -28,5 +28,17 @@
     color: #4d4d4d;
     font-size: 1.5rem;
 }
-
+.mainContainer__left > div.buttonjoin{
+    width: fit-content;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    margin-top: 0.8rem;
+    font-size: 1.2rem;
+    background: rgb(197,44,208) ;
+    color: white;
+    padding-inline: 1.2rem;
+    padding-block: 0.8rem;
+    border-radius: 20px;
+}
 

@@ -21,7 +21,7 @@ export default function Home() {
 
           <div onClick={()=>{
             router.push("/login")
-          }}className="buttonjoin">
+          }}className={styles.buttonjoin}>
             <p>Join Now</p>
           </div>
 
