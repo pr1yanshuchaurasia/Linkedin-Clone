@@ -15,3 +15,41 @@
     background: white;
     box-shadow: 10px 10px 15px rgb(173,173,173);
 }
+
+.cardContainer__left{
+    flex: 0.6;
+    padding: 2rem;
+    text-align: center;
+}
+.cardleft__heading{
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.inputField{
+    padding-inline: 1.3rem;
+    padding-block: 0.8rem;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid silver;
+}
+
+.cardContainer__right{
+    flex: 0.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00488b;
+}
+.inputContainers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.3rem;
+}
+.inputRow{
+    width: fit-content;
+    display: flex;
+    gap: 1.2rem;
+}
