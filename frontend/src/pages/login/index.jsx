@@ -37,6 +37,11 @@ function LoginComponent() {
                     placeholder="Name"
                   />
                 </div>
+                 <input
+                    className={styles.inputField}
+                    type="text"
+                    placeholder="Password"
+                  />
               </div>
             </div>
             <div className={styles.cardContainer__right}></div>
