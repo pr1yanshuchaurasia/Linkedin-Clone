@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    align-items: center;
+    background: snow;
+}
+
+.cardContainer{
+    height: 80vh;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 80vw;
+    background: white;
+    box-shadow: 10px 10px 15px rgb(173,173,173);
+}
