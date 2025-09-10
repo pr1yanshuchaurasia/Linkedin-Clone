@@ -40,8 +40,20 @@ function LoginComponent() {
                  <input
                     className={styles.inputField}
                     type="text"
+                    placeholder="Email"
+                  />
+                    <input
+                    className={styles.inputField}
+                    type="text"
                     placeholder="Password"
                   />
+
+                  <div className={styles.buttonWithOutline}>
+                    <p>
+                {userLoginMethod ? "Sign In" : "Sign Up"}
+              </p>
+                  </div>
+
               </div>
             </div>
             <div className={styles.cardContainer__right}></div>
