@@ -1,19 +1,33 @@
 import UserLayout from "@/layout/UserLayout";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { use, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import styles from "./style.module.css";
+import {registerUser } from "@/config/redux/action/authAction";
 
 function LoginComponent() {
   const authState = useSelector((state) => state.auth);
   const router = useRouter();
 
+  const dispath = useDispatch();
+
   const [userLoginMethod, setUserLoginMethod] = useState(false);
+
+  const [email, setEmailAddress]=useState("");
+  const [password, setPassword]=useState("");
+  const [username, setUsername]=useState("");
+  const [name, setName]=useState("");
+
   useEffect(() => {
     if (authState.loggedIn) {
       router.push("/dashboard");
     }
   });
+
+  const handleRegister = () => {
+    console.log("registering....");
+    dispath(registerUser({username, password, email, name}));
+  };
   return (
     <div>
       <UserLayout>
@@ -37,23 +51,28 @@ function LoginComponent() {
                     placeholder="Name"
                   />
                 </div>
-                 <input
-                    className={styles.inputField}
-                    type="text"
-                    placeholder="Email"
-                  />
-                    <input
-                    className={styles.inputField}
-                    type="text"
-                    placeholder="Password"
-                  />
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  placeholder="Email"
+                />
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  placeholder="Password"
+                />
 
-                  <div className={styles.buttonWithOutline}>
-                    <p>
-                {userLoginMethod ? "Sign In" : "Sign Up"}
-              </p>
-                  </div>
-
+                <div
+                  onClick={() => {
+                    if (userLoginMethod) {
+                    } else {
+                      handleRegister();
+                    }
+                  }}
+                  className={styles.buttonWithOutline}
+                >
+                  <p>{userLoginMethod ? "Sign In" : "Sign Up"}</p>
+                </div>
               </div>
             </div>
             <div className={styles.cardContainer__right}></div>
