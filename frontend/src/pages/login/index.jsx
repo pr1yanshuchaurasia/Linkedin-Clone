@@ -40,23 +40,23 @@ function LoginComponent() {
               <div className={styles.inputContainers}>
                 <div className={styles.inputRow}>
                   {" "}
-                  <input
+                  <input onChange={(e)=>setUsername(e.target.value)}
                     className={styles.inputField}
                     type="text"
                     placeholder="Username"
                   />{" "}
-                  <input
+                  <input onChange={(e)=>setName(e.target.value)}
                     className={styles.inputField}
                     type="text"
                     placeholder="Name"
                   />
                 </div>
-                <input
+                <input onChange={(e)=>setEmailAddress(e.target.value)}
                   className={styles.inputField}
                   type="text"
                   placeholder="Email"
                 />
-                <input
+                <input onChange={(e)=>setPassword(e.target.value)}
                   className={styles.inputField}
                   type="text"
                   placeholder="Password"
