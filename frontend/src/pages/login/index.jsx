@@ -1,9 +1,10 @@
 import UserLayout from "@/layout/UserLayout";
-import React, { use, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import styles from "./style.module.css";
 import {registerUser } from "@/config/redux/action/authAction";
+
 
 function LoginComponent() {
   const authState = useSelector((state) => state.auth);
@@ -20,7 +21,7 @@ function LoginComponent() {
 
   useEffect(() => {
     if (authState.loggedIn) {
-      router.push("/dashboard");
+      router.push("/login");
     }
   });
 
@@ -31,12 +32,17 @@ function LoginComponent() {
   return (
     <div>
       <UserLayout>
+
+       
         <div className={styles.container}>
           <div className={styles.cardContainer}>
             <div className={styles.cardContainer__left}>
               <p className={styles.cardleft__heading}>
                 {userLoginMethod ? "Sign In" : "Sign Up"}
               </p>
+
+               <p></p>{authState.message.message}
+
               <div className={styles.inputContainers}>
                 <div className={styles.inputRow}>
                   {" "}
