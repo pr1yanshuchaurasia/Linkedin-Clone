@@ -21,9 +21,9 @@ function LoginComponent() {
 
   useEffect(() => {
     if (authState.loggedIn) {
-      router.push("/login");
+      router.push("/dashboard");
     }
-  });
+  },[authState.loggedIn]);
 
   const handleRegister = () => {
     console.log("registering....");
@@ -41,7 +41,7 @@ function LoginComponent() {
                 {userLoginMethod ? "Sign In" : "Sign Up"}
               </p>
 
-               <p></p>{authState.message.message}
+               <p style={{color: authState.isError ? "red":"green"}}>{authState.message.message}</p>
 
               <div className={styles.inputContainers}>
                 <div className={styles.inputRow}>
