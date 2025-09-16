@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../../action/authAction";
 
-
 const initialState = {
   user: [],
   isError: false,
@@ -44,18 +43,20 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.message = "Registering You...";
       })
-      .addCase(registerUser.fulfilled,(state)=>{
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.loggedIn = true;
-        state.message = "Registration is Successful, Please Login!";
+        state.message = {
+          message: "Registration is Successful, Please Login!",
+        };
       })
-      .addCase(registerUser.rejected, (state,action)=>{
+
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      })
+      });
   },
 });
 

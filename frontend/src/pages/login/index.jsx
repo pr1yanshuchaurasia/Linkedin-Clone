@@ -21,7 +21,7 @@ function LoginComponent() {
 
   useEffect(() => {
     if (authState.loggedIn) {
-      router.push("/dashboard");
+      router.push("/login");
     }
   },[authState.loggedIn]);
 
