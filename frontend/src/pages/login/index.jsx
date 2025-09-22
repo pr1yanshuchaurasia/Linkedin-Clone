@@ -1,9 +1,12 @@
 import UserLayout from "@/layout/UserLayout";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import styles from "./style.module.css";
 import { registerUser } from "@/config/redux/action/authAction";
+import { emptyMessage } from "@/config/redux/reducer/authReducer";
+
+
 
 function LoginComponent() {
   const authState = useSelector((state) => state.auth);
@@ -23,6 +26,11 @@ function LoginComponent() {
       router.push("/login");
     }
   }, [authState.loggedIn]);
+  
+
+  useEffect(()=>{
+    dispath(emptyMessage())
+  },[userLoginMethod])
 
   const handleRegister = () => {
     console.log("registering....");
