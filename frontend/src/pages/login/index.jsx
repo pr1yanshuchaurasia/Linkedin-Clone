@@ -9,6 +9,7 @@ import { loginUser } from "@/config/redux/action/authAction";
 
 
 
+
 function LoginComponent() {
   const authState = useSelector((state) => state.auth);
   const router = useRouter();
@@ -24,9 +25,21 @@ function LoginComponent() {
 
   useEffect(() => {
     if (authState.loggedIn) {
-      router.push("/login");
+      router.push("/dashboard");
     }
   }, [authState.loggedIn]);
+  
+  // useEffect(()=>{
+  //   if(localStorage.getItem("token")){
+  //     router.push("/dashboard")
+  //   }
+  // },[])
+  useEffect(() => {
+  if (localStorage.getItem("token") && router.pathname !== "/login") {
+    router.push("/dashboard");
+  }
+}, [router]);
+
   
 
   useEffect(()=>{
