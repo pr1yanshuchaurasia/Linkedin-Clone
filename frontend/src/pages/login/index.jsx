@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import styles from "./style.module.css";
 import { registerUser } from "@/config/redux/action/authAction";
 import { emptyMessage } from "@/config/redux/reducer/authReducer";
+import { loginUser } from "@/config/redux/action/authAction";
 
 
 
@@ -39,6 +40,7 @@ function LoginComponent() {
 
   const handleLogin = (()=>{
     console.log("logging in....");
+    dispath(loginUser({ email ,password }));
   })
   return (
     <div>
