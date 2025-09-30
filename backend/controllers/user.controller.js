@@ -109,10 +109,8 @@ export const login = async (req, res) => {
 
     await User.updateOne({ _id: user._id }, { token });
     return res.json({ token: token });
-
   } catch (error) {
     return res.status(500).json({ message: error.message });
-
   }
 };
 
@@ -225,7 +223,10 @@ export const downloadProfile = async (req, res) => {
     "userId",
     "name username email profilePicture"
   );
-
+  // Early return if profile not found
+  if (!userProfile) {
+    return res.status(404).json({ message: "Profile not found" });
+  }
   let outputPath = await convertUserDataTOPDF(userProfile);
 
   return res.json({ message: outputPath });
@@ -250,7 +251,9 @@ export const sendConnectionRequest = async (req, res) => {
       connectionId: connectionUser._id,
     });
     if (existingRequest) {
-      return res.status(400).json({ message: "Connection request already sent" });
+      return res
+        .status(400)
+        .json({ message: "Connection request already sent" });
     }
 
     const request = new ConnectionRequest({
@@ -260,14 +263,12 @@ export const sendConnectionRequest = async (req, res) => {
 
     await request.save();
     return res.json({ message: "Connection request sent successfully" });
-
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 
-export const getMyConnectionsRequests = async (req,res)=>{
-
+export const getMyConnectionsRequests = async (req, res) => {
   const { token } = req.body;
 
   try {
@@ -275,33 +276,33 @@ export const getMyConnectionsRequests = async (req,res)=>{
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const connection = await ConnectionRequest.find({userId: user._id})
-    .populate("connectionId", "name username email profilePicture");
+    const connection = await ConnectionRequest.find({
+      userId: user._id,
+    }).populate("connectionId", "name username email profilePicture");
 
     return res.json(connection);
-
-  }catch(error){
+  } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 export const whatAreMyConnections = async (req, res) => {
   const { token } = req.body;
-  try{
+  try {
     const user = await User.findOne({ token });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const connections = await ConnectionRequest.find({connectionId: user._id})
-    .populate("userId", "name username email profilePicture");
+    const connections = await ConnectionRequest.find({
+      connectionId: user._id,
+    }).populate("userId", "name username email profilePicture");
 
     return res.json(connections);
-
-  }catch(error){
+  } catch (error) {
     return res.status(500).json({ message: error.message });
-  } 
-}
+  }
+};
 
 export const acceptConnectionRequest = async (req, res) => {
   const { token, requestId, action_type } = req.body;
@@ -315,44 +316,42 @@ export const acceptConnectionRequest = async (req, res) => {
 
     const connection = await ConnectionRequest.findOne({ _id: requestId });
 
-    if( !connection) {
+    if (!connection) {
       return res.status(404).json({ message: "Connection request not found" });
     }
-    if(action_type === "accept"){
+    if (action_type === "accept") {
       connection.status_accepted = true;
-    }else{
+    } else {
       connection.status_accepted = false;
     }
 
     await connection.save();
     return res.json({ message: "Connection request updated successfully" });
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
+export const commentPost = async (req, res) => {
+  const { token, post_id, commentBody } = req.body;
 
-export const commentPost = async (req,res)=>{
-  const {token, post_id, commentBody} = req.body;
-
-  try{
-    const user = await User.findOne({token: token}).select("_id");
-    if(!user){
+  try {
+    const user = await User.findOne({ token: token }).select("_id");
+    if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const post = await Post.findOne({_id: post_id});
-    if(!post){
+    const post = await Post.findOne({ _id: post_id });
+    if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
     const comment_to_add = new Comment({
       userId: user._id,
       postId: post._id,
       comment: commentBody,
-    })
+    });
     await comment.save();
     return res.status(200).json({ message: "Comment added successfully" });
-  }catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-
-}
+};
