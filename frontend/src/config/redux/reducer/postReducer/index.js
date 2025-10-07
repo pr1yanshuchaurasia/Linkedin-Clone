@@ -1,5 +1,5 @@
-const { createSlice } = require("@reduxjs/toolkit");
-const { init } = require("next/dist/compiled/webpack/webpack");
+import { createSlice } from "@reduxjs/toolkit";
+import { getAllPosts } from "../../action/postAction";
 
 const initialState = {
   posts: [],
