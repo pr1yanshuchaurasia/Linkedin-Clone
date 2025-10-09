@@ -68,7 +68,7 @@ export const getAboutUser = createAsyncThunk(
   async(user, thunkAPI)=>{
     try{
       const response = await clientServer.get("/get_user_and_profile",{
-        params:{
+        data:{
           token: user.token
         }
       })
