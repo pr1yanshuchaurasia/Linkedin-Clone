@@ -30,7 +30,9 @@ export default function Dashboard() {
     },[isTokenThere])
   return (
     <div>
-      Hey
+       {authState.user?.userId?.name && (
+      <div>Hey {authState.user.userId.name}</div>
+    )}
     </div>
   )
 }

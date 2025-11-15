@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "../../action/authAction";
+import { loginUser, registerUser,getAboutUser } from "../../action/authAction";
 
 const initialState = {
   user: [],
@@ -64,9 +64,10 @@ const authSlice = createSlice({
         state.isLoading=false;
         state.isError=false;
         state.profileFetched=true;
-        state.user=action.payload.user;
-        state.connections=action.payload.connections;
-        state.connectionRequest=action.payload.connectionRequest;
+        // state.user=action.payload.user;
+        // state.connections=action.payload.connections;
+        // state.connectionRequest=action.payload.connectionRequest;
+        state.user=action.payload.profile;
         state.message="User Profile Fetched Successfully";
       })
   },
