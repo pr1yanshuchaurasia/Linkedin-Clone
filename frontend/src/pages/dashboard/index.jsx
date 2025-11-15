@@ -3,12 +3,14 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux';
 import { getAllPosts } from '@/config/redux/action/postAction';
 import { getAboutUser } from '@/config/redux/action/authAction';
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
 
   const router = useRouter();
   const dispath = useDispatch();
 
+  const authState = useSelector((state)=>state.auth);
   const [isTokenThere, setIsTokenThere] = React.useState(false);
 
     useEffect(()=>{
@@ -28,7 +30,7 @@ export default function Dashboard() {
     },[isTokenThere])
   return (
     <div>
-      Dashboard
+      Hey
     </div>
   )
 }
